@@ -39,7 +39,7 @@ def home_view(request):
         'total_dishes': total_dishes, 
         'stat': stat, 
         'total_users': total_users, 
-        'todays_revenue': todays_revenue,
+        'todays_revenue': int(todays_revenue),
         'percentage_change': percentage_change,
         'stonks': stonks,
     })
