@@ -1,0 +1,208 @@
+{% load static %}
+{% load custom_filters %}
+
+<!DOCTYPE html>
+<html lang="en" data-theme='dark'>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poha-Jalebi Corner</title>
+  <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://unpkg.com/htmx.org@2.0.3" integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq" crossorigin="anonymous"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+  <div class="wrapper">
+    <main class="content">
+      {% include 'includes/header.html' %}
+
+      <div class="hero bg-base-200 min-h-1/2">
+        <div class="hero-content text-center">
+          <div class="max-w-md">
+            <h1 class="text-5xl font-bold">Poha-Jalebi Corner</h1>
+            <p class="py-6">
+              Where Every Bite is a Taste of Excellence
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="mt-10">
+        <div class="hero">
+          <div class="stats bg-neutral flex flex-col md:flex-row">
+            <div class="stat">
+              <div class="stat-figure text-secondary">
+                <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 1024 1024"
+              class="inline-block h-8 w-8 stroke-current">
+              <path
+                stroke-width="2"
+                fill="currentColor"
+                d="M128 352.576V352a288 288 0 0 1 491.072-204.224a192 192 0 0 1 274.24 204.48a64 64 0 0 1 57.216 74.24C921.6 600.512 850.048 710.656 736 756.992V800a96 96 0 0 1-96 96H384a96 96 0 0 1-96-96v-43.008c-114.048-46.336-185.6-156.48-214.528-330.496A64 64 0 0 1 128 352.64zm64-.576h64a160 160 0 0 1 320 0h64a224 224 0 0 0-448 0m128 0h192a96 96 0 0 0-192 0m439.424 0h68.544A128.256 128.256 0 0 0 704 192c-15.36 0-29.952 2.688-43.52 7.616c11.328 18.176 20.672 37.76 27.84 58.304A64.128 64.128 0 0 1 759.424 352M672 768H352v32a32 32 0 0 0 32 32h256a32 32 0 0 0 32-32zm-342.528-64h365.056c101.504-32.64 165.76-124.928 192.896-288H136.576c27.136 163.072 91.392 255.36 192.896 288"></path>
+            </svg>        </div>
+              <div class="stat-title">Dishes Served</div>
+              <div id="dishes_served" class="stat-value">{{ stat.dishes_served }}</div>
+              <div class="stat-desc">Oct 19th - now</div>
+            </div>
+
+            <div class="stat">
+              <div class="stat-figure text-secondary">
+                <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              class="inline-block h-8 w-8 stroke-current">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M18 13a4 4 0 1 0-2.225-7.325M6 13a4 4 0 1 1 2.225-7.325m7.55 0a4.002 4.002 0 0 0-7.55 0m7.55 0A4 4 0 0 1 15.874 8m-6.41-1a4 4 0 0 0-1.24-1.325M6 17.5c1.599-.622 3.7-1 6-1s4.401.378 6 1M5 21c1.866-.622 4.316-1 7-1s5.134.378 7 1m-1-9v8M6 12v8"></path>
+            </svg>        </div>
+              <div class="stat-title">Today's sale</div>
+              <div id="todays_revenue" class="stat-value">{{ todays_revenue|format_revenue }}</div>
+              <div id="change" class="stat-desc">{{ stonks }} {{ percentage_change }}% in last 24hrs</div>
+            </div>
+
+            <div class="stat">
+              <div class="stat-figure text-secondary">
+                <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              class="inline-block h-8 w-8 stroke-current">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 7V6a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1M3 18v-7a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"></path>
+            </svg></div>
+              <div class="stat-title">Revenue generated</div>
+              <div id="revenue_generated" class="stat-value">{{ stat.revenue|format_revenue }}</div>
+            <div class="stat-desc">and growing</div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="border-b border-gray-500 my-6 mx-auto w-full max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-4xl"></div>
+
+      <section class="px-8 py-10">
+        <div class="container mx-auto">
+          <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+
+            {% for dish in dishes %}
+              <div class="card flex flex-col bg-base-100 shadow-xl max-w-full">
+                <figure class="h-56 w-full overflow-hidden">
+                  <img src="{{ dish.image }} " alt="shoes" />
+                </figure>
+                <div class="card-body">
+                  <h2 class="card-title">
+                            {{ dish.name }}
+                  {% if dish.badge %}
+                    <div class="badge badge-secondary">{{ dish.badge }}</div>
+                  {% endif %}
+                  </h2>
+
+                  <div class="rating rating-half rating-sm">
+                    {% for i in "0123456789" %}
+                      {% with i_value=i|add:"1" %}
+                        {% if i_value|divisibleby:2 %}
+                          {% if dish.rating < i_value or dish.rating > i_value %}
+                          <input type="radio" name="rating-{{dish.id}}-{{i_value}}" class="mask mask-half-2 mask-star-2 bg-green-500" disabled />
+                          {% else %}
+                            <input type="radio" name="rating-{{dish.id}}-{{i_value}}" class="mask mask-half-2 mask-star-2 bg-green-500" disabled checked="checked"/>
+                          {% endif %}
+                        {% else %}
+                          {% if dish.rating < i_value or dish.rating > i_value %}
+                            <input type="radio" name="rating-{{dish.id}}-{{i_value}}" class="mask mask-half-1 mask-star-2 bg-green-500" disabled />
+                          {% elif dish.rating == i_value %}
+                            <input type="radio" name="rating-{{dish.id}}-{{i_value}}" class="mask mask-half-1 mask-star-2 bg-green-500" disabled checked="checked"/>
+                          {% endif %}
+                        {% endif %}
+                      {% endwith %}
+                    {% endfor %}
+                  </div>
+
+                  <p>{{ dish.description }}</p>
+                  <div>
+                    {% for tag in dish.tags.all %}
+                      <div class="badge badge-accent">{{ tag.name }}</div>
+                    {% endfor %}
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <p class="text-2xl pt-3 font-bold">₹{{ dish.price }}</p> <!-- price aligned left -->
+                  <div class="card-actions">
+                      <button 
+                        hx-post="{% url 'buy_dish' dish.id %}" 
+                          hx-target="#dishes_served" 
+                          hx-swap="outerHTML"
+                        class="btn btn-primary">Buy Now</button>
+                  </div>
+              </div>          </div>
+              </div>
+            {% empty %}
+              no dishes
+            {% endfor %}
+
+            </div>
+        </div>
+      </section>
+
+
+      <div class="border-b border-gray-500 my-6 mx-auto w-full max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-4xl"></div>
+
+      <div class="container mx-auto">
+      <div class="text-3xl pb-8 text-center underline underline-offset-4">Sneak peek into the kitchen</div> 
+        <div class="overflow-x-auto hero pb-8">
+          <table class="table mx-auto text-lg" style="max-width: 900px;">
+            <thead>
+              <tr class="text-xl">
+                <th></th>
+                <th>Dish</th>
+                <th>Current price</th>
+                <th>Dishes Ready to be served</th>
+                <th>Restocked last time</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for dish in dishes %}
+                <tr class="hover">
+                  <th>{{ dish.id }}</th>
+                  <td>
+                    <div class="flex items-center gap-3">
+                      <div class="avatar">
+                        <div class="mask mask-squircle h-12 w-12">
+                          <img
+                              src="{{ dish.image }}"
+                            alt="Avatar Tailwind CSS Component" />
+                        </div>
+                      </div>
+                      <div>
+                        <div class="font-bold">{{ dish.name }}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>₹{{ dish.price }}</td>
+                  <td id="stock-{{ dish.id }}">{{ dish.stock }}</td>
+                  <td>{{ dish.last_modified|time_ago }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  {% include "includes/footer.html" %}
+  </div>
+
+  <script src="{% static 'index.js' %}"></script>
+</body>
+
+</html>

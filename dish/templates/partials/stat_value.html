@@ -1,0 +1,9 @@
+{% load custom_filters %}
+
+<div id="revenue_generated" hx-swap-oob="true" class="stat-value">{{ stat.revenue|format_revenue }}</div>
+
+<div id="dishes_served" hx-swap-oob="true" class="stat-value">{{ stat.dishes_served }}</div>
+
+<div id="todays_revenue" hx-swap-oob="true" class="stat-value">{{ todays.revenue|format_revenue }}</div>
+
+<div id="change" hx-swap-oob="true" class="stat-desc">{{ change.stonks }} {{ change.percentage }}% in last 24hrs</div>
