@@ -1,14 +1,14 @@
 {
   "version": 2,
   "builds": [{
-        "src": "dummy1/wsgi.py",
+        "src": "main/wsgi.py",
         "use": "@vercel/python",
         "config": { "maxLambdaSize": "15mb" }
     }],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "dummy1/wsgi.py"
+      "dest": "main/wsgi.py"
     }
   ]
 }
